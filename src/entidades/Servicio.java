@@ -1,12 +1,14 @@
 package entidades;
 
-public class Cuenta {
+public class Servicio {
     private int codigo;
     private String nombre;
+    private Cuenta cuenta;
 
-    public Cuenta(int codigo, String nombre) {
+    public Servicio(int codigo, String nombre, Cuenta cuenta) {
         this.codigo = codigo;
         this.nombre = nombre;
+        this.cuenta = cuenta;
     }
 
     public String getNombre() {
@@ -15,5 +17,9 @@ public class Cuenta {
 
     public int getCodigo() {
         return codigo;
+    }
+
+    public Cuenta getCuenta() {
+        return cuenta;
     }
 }
