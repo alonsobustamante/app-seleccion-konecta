@@ -6,7 +6,8 @@ import entidades.Servicio;
 import java.util.List;
 
 public interface ServicioDao {
-    public List<Servicio> findAll();
+    public List<Servicio> obtenerServicios();
 
-    public void create(Servicio servicio);
+    public void agregarServicio(Servicio servicio);
+
 }

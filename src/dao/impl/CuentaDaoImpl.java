@@ -6,21 +6,21 @@ import entidades.Cuenta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CuentaDaoMemory implements CuentaDao {
+public class CuentaDaoImpl implements CuentaDao {
 
     private List<Cuenta> cuentas;
 
-    public CuentaDaoMemory() {
+    public CuentaDaoImpl() {
         this.cuentas = new ArrayList<>();
     }
 
     @Override
-    public List<Cuenta> findAll() {
+    public List<Cuenta> obtenerCuentas() {
         return this.cuentas;
     }
 
     @Override
-    public void create(Cuenta cuenta) {
+    public void agregarCuenta(Cuenta cuenta) {
         this.cuentas.add(cuenta);
     }
 }

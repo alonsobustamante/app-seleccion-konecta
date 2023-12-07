@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.CuentaDao;
 import dao.ServicioDao;
+import dao.UsuarioDao;
 
 public class DaoFactory {
 
@@ -18,14 +19,21 @@ public class DaoFactory {
 
     public CuentaDao getCuentaDao(int tipo){
         switch(tipo){
-           case 1: return new CuentaDaoMemory();
+           case 1: return new CuentaDaoImpl();
            default: return null;
         }
     }
 
     public ServicioDao getServicioDao(int tipo){
         switch(tipo){
-            case 1: return new ServicioDaoMemory();
+            case 1: return new ServicioDaoImpl();
+            default: return null;
+        }
+    }
+
+    public UsuarioDao getUsuarioDao(int tipo){
+        switch(tipo){
+            case 1: return new UsuarioDaoImpl();
             default: return null;
         }
     }
