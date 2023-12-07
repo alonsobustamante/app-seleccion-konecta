@@ -26,4 +26,8 @@ public class Cuenta {
     public List<Servicio> getServicios() {
         return servicios;
     }
+
+    public void agregarServicio(Servicio servicio) {
+        this.servicios.add(servicio);
+    }
 }

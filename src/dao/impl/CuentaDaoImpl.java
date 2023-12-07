@@ -23,4 +23,14 @@ public class CuentaDaoImpl implements CuentaDao {
     public void agregarCuenta(Cuenta cuenta) {
         this.cuentas.add(cuenta);
     }
+
+    @Override
+    public Cuenta obtenerCuenta(int i) {
+        for (Cuenta c : cuentas) {
+            if (c.getCodigo() == i) {
+                return c;
+            }
+        }
+        return null;
+    }
 }
