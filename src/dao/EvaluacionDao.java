@@ -11,9 +11,11 @@ public interface EvaluacionDao {
 
     public Evaluacion obtenerEvaluacionPorCodigo(String codigo);
 
-    public List<Evaluacion> obtenerEvaluacionesPorDniYEstado(String dni, String estado);
+    public Evaluacion obtenerEvaluacionesPorDniYEstado(String dni, String estado);
 
     public List<Evaluacion> obtenerEvaluacionesPorEstado(String estado);
 
     public List<Evaluacion> obtenerEvaluacionesPorFechaEvaluacion(String fechaEvaluacion);
+
+    public List<Evaluacion> obtenerEvaluacionesPorEstadoDestacado();
 }

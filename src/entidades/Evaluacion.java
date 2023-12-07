@@ -90,18 +90,24 @@ public class Evaluacion {
     }
 
     public int getNotaFinal() {
+        if (nota1 != 0 && nota2 != 0 && nota3 != 0) {
+            notaFinal = (nota1 + nota2 + nota3) ;
+        }
         return notaFinal;
     }
 
-    public void setNotaFinal(int notaFinal) {
-        this.notaFinal = notaFinal;
-    }
 
     public String getEstado() {
-        return estado;
-    }
+        if(getNotaFinal() == 0) {
+            return "Sin Estado";
+        }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+        if (getNotaFinal() <= perfil.getNotaInicial()){
+            return "Desaprobado";
+        }else if (getNotaFinal() > perfil.getNotaInicial() && getNotaFinal() < perfil.getNotaFinal()){
+            return "Normal";
+        }else{
+            return "Destacado";
+        }
     }
 }

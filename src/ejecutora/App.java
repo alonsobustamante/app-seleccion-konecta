@@ -43,7 +43,7 @@ public class App {
     private static void inicioSesion() {
         UsuarioDTO usuario = new UsuarioDTO();
 
-        boolean credencialesCorrectas = true;
+        boolean credencialesCorrectas = false;
 
         while(!credencialesCorrectas) {
             System.out.println("--------------------------------------------------------------------");
@@ -69,7 +69,7 @@ public class App {
         }
 
         //seleccion.setUsuarioLogueado(seleccion.getUsuarioDao().iniciarSesion(new UsuarioDTO("jbustamante", "12345678", "POS")));
-        seleccion.setUsuarioLogueado(seleccion.getUsuarioDao().iniciarSesion(new UsuarioDTO("arengifo", "12345678", "ENT")));
+        //seleccion.setUsuarioLogueado(seleccion.getUsuarioDao().iniciarSesion(new UsuarioDTO("arengifo", "12345678", "ENT")));
 
         System.out.println("");
         System.out.println("Bienvenido al Sistema: " + seleccion.getUsuarioLogueado().getRol() + " - " + seleccion.getUsuarioLogueado().getNombres() + " " + seleccion.getUsuarioLogueado().getApellidos());
@@ -435,10 +435,10 @@ public class App {
                     listarEvaluacionesPorDia();
                     break;
                 case 3:
-                    //registrarNotasEvaluacion();
+                    registrarNotasEvaluacion();
                     break;
                 case 4:
-                    //postulantesAptosProcesoSeleccion();
+                    postulantesAptosProcesoSeleccion();
                     break;
                 case 5:
                     System.out.println("Cerrando Sesion...");
@@ -448,6 +448,80 @@ public class App {
                     break;
             }
         }while (opcion != 5);
+    }
+
+    private static void postulantesAptosProcesoSeleccion() {
+        System.out.println("");
+
+        System.out.println("====================== Lista de Postulantes Aptos en el Proceso de Seleccion ======================");
+
+        List<Evaluacion> evaluaciones = seleccion.getEvaluacionDao().obtenerEvaluacionesPorEstadoDestacado();
+
+        if (evaluaciones.size() == 0){
+            System.out.println("======================================================================");
+            System.out.println("No hay postulantes aptos en el proceso de seleccion");
+            System.out.println("======================================================================");
+            return;
+        }
+
+        System.out.println("");
+        evaluaciones.stream().forEach(
+                evaluacion -> {
+                    System.out.println("- " + evaluacion.getEntrevista().getPostulacion().getPostulante().getDni() + " | " + evaluacion.getEntrevista().getPostulacion().getPostulante().getNombres() + " " + evaluacion.getEntrevista().getPostulacion().getPostulante().getApellidos()
+                            + " | " + evaluacion.getNotaFinal() + " | " + evaluacion.getEstado()
+                    );
+                }
+        );
+        System.out.println("");
+    }
+
+    private static void registrarNotasEvaluacion() {
+        System.out.println("");
+        String dni = "";
+        int opcion = 0;
+
+        System.out.println("====================== Registrar Notas de Evaluacion ======================");
+        System.out.print("Ingrese el dni del postulante: ");
+        dni = sc.nextLine();
+
+        Evaluacion evaluacion = seleccion.getEvaluacionDao().obtenerEvaluacionesPorDniYEstado(dni,"En Evaluacion");
+
+        if (evaluacion == null){
+            System.out.println("======================================================================");
+            System.out.println("No existe el postulante con el dni ingresado o no se encuentra en evaluacion.");
+            System.out.println("======================================================================");
+            return;
+        }
+
+        System.out.println("====================== Registrar Notas de Evaluacion ======================");
+
+        System.out.println("Codigo: " + evaluacion.getCodigo());
+        System.out.println("Dni: " + evaluacion.getEntrevista().getPostulacion().getPostulante().getDni());
+        System.out.println("Nombres: " + evaluacion.getEntrevista().getPostulacion().getPostulante().getNombres());
+        System.out.println("Apellidos: " + evaluacion.getEntrevista().getPostulacion().getPostulante().getApellidos());
+        System.out.print("Nota 1: ");
+        evaluacion.setNota1(sc.nextInt());
+        System.out.print("Nota 2: ");
+        evaluacion.setNota2(sc.nextInt());
+        System.out.print("Nota 3: ");
+        evaluacion.setNota3(sc.nextInt());
+
+        System.out.println("");
+        System.out.println("======================================================================");
+
+        System.out.print("¿Desea registrar las notas de la evaluacion? (1) Si (2) No: ");
+        opcion = sc.nextInt();
+
+        if(opcion == 1){
+
+            seleccion.getEvaluacionDao().actualizarEvaluacion(evaluacion);
+
+            seleccion.getPostulacionDao().actualizarEstadoPostulacion(evaluacion.getEntrevista().getPostulacion().getCodigo(), "Terminado");
+
+            System.out.println("====================================");
+            System.out.println("Notas registrada correctamente");
+            System.out.println("====================================");
+        }
     }
 
     private static void listarEvaluacionesPorDia() {
@@ -472,7 +546,7 @@ public class App {
         evaluacions.stream().forEach(
                 evaluacion -> {
                     System.out.println("- " + evaluacion.getEntrevista().getPostulacion().getPostulante().getDni() + " | " + evaluacion.getEntrevista().getPostulacion().getPostulante().getNombres() + " " + evaluacion.getEntrevista().getPostulacion().getPostulante().getApellidos()
-                          + " | " + evaluacion.getEstado()  + " | " + evaluacion.getLink() + " | " + evaluacion.getFechaEvaluacion() + " | " + evaluacion.getPerfil().getNombre()
+                            + " | " + evaluacion.getLink() + " | " + evaluacion.getFechaEvaluacion() + " | " + evaluacion.getPerfil().getNombre() + " | " + evaluacion.getNotaFinal() + " | " + evaluacion.getEstado()
                     );
                 }
         );

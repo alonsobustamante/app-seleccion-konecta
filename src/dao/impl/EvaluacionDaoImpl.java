@@ -43,14 +43,13 @@ public class EvaluacionDaoImpl implements EvaluacionDao {
     }
 
     @Override
-    public List<Evaluacion> obtenerEvaluacionesPorDniYEstado(String dni, String estado) {
-        List<Evaluacion> evaluacionesPorDniYEstado = new ArrayList<>();
+    public Evaluacion obtenerEvaluacionesPorDniYEstado(String dni, String estado) {
         for (Evaluacion e : evaluaciones) {
             if (e.getEntrevista().getPostulacion().getPostulante().getDni().equals(dni) && e.getEntrevista().getPostulacion().getEstado().equals(estado)) {
-                evaluacionesPorDniYEstado.add(e);
+                return e;
             }
         }
-        return evaluacionesPorDniYEstado;
+        return null;
     }
 
     @Override
@@ -75,4 +74,14 @@ public class EvaluacionDaoImpl implements EvaluacionDao {
         return evaluacionesPorFechaEvaluacion;
     }
 
+    @Override
+    public List<Evaluacion> obtenerEvaluacionesPorEstadoDestacado() {
+        List<Evaluacion> evaluacionesPorEstadoDestacado = new ArrayList<>();
+        for (Evaluacion e : evaluaciones) {
+            if (e.getEstado().equals("Destacado")) {
+                evaluacionesPorEstadoDestacado.add(e);
+            }
+        }
+        return evaluacionesPorEstadoDestacado;
+    }
 }

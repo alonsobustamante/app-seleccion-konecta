@@ -138,15 +138,17 @@ public class Seleccion {
         perfilDao.agregarPerfil(perfil2);
         perfilDao.agregarPerfil(perfil3);
 
-        Postulante postulante = new Postulante("46756591", "Juan", "Perez", 33, "Ingeniero", "UPC", "2024", "Analista", "Konecta", "2020-2022", "Trabajo en equipo", "jbustamante@gmail.com", "912345678", "https://alonso.com", "2023-12-07");
-        postulante.setUsuario(usuario1);
+//        Postulante postulante = new Postulante("46756591", "Juan", "Perez", 33, "Ingeniero", "UPC", "2024", "Analista", "Konecta", "2020-2022", "Trabajo en equipo", "jbustamante@gmail.com", "912345678", "https://alonso.com", "2023-12-07");
+//        postulante.setUsuario(usuario1);
+//
+//        postulanteDao.agregarPostulante(postulante);
+//
+//        Postulacion postulacion = new Postulacion();
+//        postulacion.setPostulante(postulante);
+//        postulacion.setConvocatoria(convocatoria1);
+//
+//        postulacionDao.grabarPostulacion(postulacion);
 
-        postulanteDao.agregarPostulante(postulante);
 
-        Postulacion postulacion = new Postulacion();
-        postulacion.setPostulante(postulante);
-        postulacion.setConvocatoria(convocatoria1);
-
-        postulacionDao.grabarPostulacion(postulacion);
     }
 }
