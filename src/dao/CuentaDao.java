@@ -5,7 +5,8 @@ import entidades.Cuenta;
 import java.util.List;
 
 public interface CuentaDao {
-    public List<Cuenta> findAll();
+    public List<Cuenta> obtenerCuentas();
+    public void agregarCuenta(Cuenta cuenta);
 
-    public void create(Cuenta cuenta);
+    public Cuenta obtenerCuenta(int i);
 }

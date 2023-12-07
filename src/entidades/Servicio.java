@@ -5,10 +5,9 @@ public class Servicio {
     private String nombre;
     private Cuenta cuenta;
 
-    public Servicio(int codigo, String nombre, Cuenta cuenta) {
+    public Servicio(int codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.cuenta = cuenta;
     }
 
     public String getNombre() {
@@ -17,6 +16,10 @@ public class Servicio {
 
     public int getCodigo() {
         return codigo;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
     }
 
     public Cuenta getCuenta() {

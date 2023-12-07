@@ -7,21 +7,23 @@ import entidades.Servicio;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServicioDaoMemory implements ServicioDao {
+public class ServicioDaoImpl implements ServicioDao {
 
     private List<Servicio> servicios;
 
-    public ServicioDaoMemory() {
+    public ServicioDaoImpl() {
         this.servicios = new ArrayList<>();
     }
 
     @Override
-    public List<Servicio> findAll() {
+    public List<Servicio> obtenerServicios() {
         return this.servicios;
     }
 
     @Override
-    public void create(Servicio servicio) {
+    public void agregarServicio(Servicio servicio) {
         this.servicios.add(servicio);
     }
+
+
 }
